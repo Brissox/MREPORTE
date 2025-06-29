@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -110,19 +112,41 @@ public class reporteServiceTest {
 
     }
 
+    @Test
+    public void testEditarReporte(){
 
-/*
+        reporte repO = new reporte();
+        repO.setId_reporte(11L);
+        repO.setTipo_reporte("solicitud");
+        repO.setDescripcion("Rancagua");
+
+        reporte repoE = new reporte();
+        repoE.setId_reporte(11L);
+        repoE.setTipo_reporte("Error");
+        repoE.setDescripcion("Santiago");
+
+        when(reporterepository.save(any(reporte.class))).thenReturn(repoE);
+        when(reporterepository.existsById(11L)).thenReturn(true);
+        reporte resultado = reporteservices.GuardarReporte(repoE);
+
+        assertNotNull(resultado);
+        assertEquals(11L, resultado.getId_reporte());
+        assertEquals("Error", resultado.getTipo_reporte());
+        assertEquals("Santiago", resultado.getDescripcion());
+
+        verify(reporterepository, times(1)).save(repoE);
+    }
 
     @Test
-    public void testEliminarEnvio(){
+    public void testEliminarReporte(){
         Long id = 11L;
-        doNothing().when(enviorepository).deleteById(id);
+        doNothing().when(reporterepository).deleteById(id);
 
-        enviosservices.Eliminar***(id);
+        reporteservices.EliminarReporte(11L);
 
-        verify(enviosrepository.times(1)).deleteById(id);
+        verify(reporterepository, times(1)).deleteById(id);
 
     }
-*/
+
 }
 

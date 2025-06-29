@@ -29,6 +29,8 @@ public class reporteServices {
 
     }
 
-
+    public void EliminarReporte(Long id_reporte){
+        reporterepository.deleteById(id_reporte);
+    }
 
 }
